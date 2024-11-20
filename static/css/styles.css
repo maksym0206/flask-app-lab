@@ -1,0 +1,133 @@
+/* Основний стиль */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa; /* Легкий сірий фон для всього сайту */
+  color: #343a40; /* Темний текст для хорошої читабельності */
+  line-height: 1.6;
+}
+
+/* Заголовки */
+h2 {
+  color: #007bff;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Розділи */
+section {
+  margin-bottom: 40px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Посилання в навігаційному меню */
+.navbar-nav .nav-link {
+  color: white;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ccc;
+}
+
+/* Картки проєктів */
+.card {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #6c757d;
+}
+
+/* Список навичок */
+.list-group-item {
+  background-color: #f8f9fa;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+}
+
+.list-group-item:nth-child(odd) {
+  background-color: #e9ecef;
+}
+
+/* Зображення профілю */
+.img-fluid {
+  border: 3px solid #007bff;
+  padding: 5px;
+}
+
+/* Нижній колонтитул */
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+}
+
+footer a {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #66b2ff;
+}
+
+/* Кнопки (для потенційного використання) */
+.btn {
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Відповідність для мобільних пристроїв */
+@media (max-width: 768px) {
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 1rem;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+  }
+
+  .card-text {
+    font-size: 0.95rem;
+  }
+}

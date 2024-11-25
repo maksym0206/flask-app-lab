@@ -1,133 +1,120 @@
-/* Основний стиль */
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f8f9fa; /* Легкий сірий фон для всього сайту */
-  color: #343a40; /* Темний текст для хорошої читабельності */
-  line-height: 1.6;
+/* styles.css */
+html, body {
+  height: 100%;
+  margin: 0;
 }
 
-/* Заголовки */
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Arial', sans-serif;
+}
+
+.container {
+  flex: 1; /* Займає весь доступний простір */
+}
+
+footer {
+  background-color: #333; /* Змінюйте за потреби */
+  text-align: center;
+  padding: 1rem 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
 h2 {
   color: #007bff;
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 20px;
 }
 
-/* Розділи */
 section {
   margin-bottom: 40px;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Посилання в навігаційному меню */
-.navbar-nav .nav-link {
-  color: white;
-  font-size: 1.1rem;
-  transition: color 0.3s ease;
+/* Стилі для навігаційного бару */
+.navbar {
+  background-color: #343a40 !important; /* Темний фон */
+  border-bottom: 2px solid #ffc107; /* Жовта смужка під баром */
 }
 
-.navbar-nav .nav-link:hover {
-  color: #ccc;
-}
-
-/* Картки проєктів */
-.card {
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-}
-
-.card-title {
+.navbar-brand {
+  color: #ffc107 !important; /* Жовтий текст для бренда */
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-.card-text {
+.navbar-brand:hover {
+  color: #ffffff !important; /* Білий текст при наведенні */
+}
+
+.navbar-nav .nav-link {
+  color: #adb5bd !important; /* Світло-сірий текст для посилань */
   font-size: 1rem;
-  line-height: 1.5;
-  color: #6c757d;
+  padding: 0.5rem 1rem;
+  transition: color 0.3s ease-in-out;
 }
 
-/* Список навичок */
-.list-group-item {
-  background-color: #f8f9fa;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1rem;
+.navbar-nav .nav-link:hover {
+  color: #ffc107 !important; /* Жовтий текст при наведенні */
+  background-color: #495057; /* Темно-сірий фон при наведенні */
+  border-radius: 5px; /* Закруглені кути */
 }
 
-.list-group-item:nth-child(odd) {
-  background-color: #e9ecef;
+.navbar-toggler {
+  border-color: #ffc107; /* Жовта рамка для кнопки перемикання */
 }
 
-/* Зображення профілю */
-.img-fluid {
-  border: 3px solid #007bff;
-  padding: 5px;
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255,193,7,1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  /* Жовта іконка гамбургерного меню */
 }
 
-/* Нижній колонтитул */
-footer {
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 20px 0;
-}
-
-footer a {
-  color: #007bff;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-footer a:hover {
-  color: #66b2ff;
-}
-
-/* Кнопки (для потенційного використання) */
-.btn {
-  border-radius: 25px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn-primary {
-  background-color: #007bff;
-  color: white;
-  border: none;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-  transform: scale(1.05);
-}
-
-/* Відповідність для мобільних пристроїв */
+/* Адаптивний вигляд для мобільних пристроїв */
 @media (max-width: 768px) {
-  h2 {
-    font-size: 1.5rem;
-  }
-
   .navbar-nav .nav-link {
-    font-size: 1rem;
+      text-align: center;
+      padding: 0.7rem 1rem;
   }
 
-  .card-title {
-    font-size: 1.25rem;
-  }
-
-  .card-text {
-    font-size: 0.95rem;
+  .navbar {
+      border-bottom: none; /* Прибрано смужку для мобільних */
   }
 }
+
+        /* Кастомізація стилів Bootstrap */
+        .jumbotron {
+          background: linear-gradient(135deg, #4CAF50, #8BC34A);
+          color: white;
+          padding: 3rem;
+          border-radius: 10px;
+      }
+      .jumbotron h1 {
+          font-size: 3.5rem;
+          font-weight: bold;
+      }
+      .btn-primary {
+          background-color: #FF5722;
+          border-color: #FF5722;
+      }
+      .btn-primary:hover {
+          background-color: #E64A19;
+          border-color: #E64A19;
+      }
+      section {
+          margin-top: 2rem;
+          padding: 2rem;
+          background-color: #f9f9f9;
+          border-left: 5px solid #4CAF50;
+          border-radius: 10px;
+          box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      section h2 {
+          font-size: 1.8rem;
+          color: #4CAF50;
+      }
+      a {
+          text-decoration: none;
+      }
+      a:hover {
+          text-decoration: underline;
+      }

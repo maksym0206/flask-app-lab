@@ -1,10 +1,15 @@
+import os
+import hashlib
+
 from . import user_bp
 from flask import request, redirect, url_for, render_template, session, flash, make_response
 from datetime import timedelta
 from .models import User
-from .forms import RegistrationForm, LoginForm
+from .forms import RegistrationForm, LoginForm, UpdateForm, ChangePasswordForm
 from flask_login import login_user, logout_user, login_required, current_user
 from app import db
+from werkzeug.utils import secure_filename
+from flask import current_app
 
 users = {
     "user1": "123",
@@ -32,7 +37,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash('Registration successful!', 'success')
-        return redirect(url_for('login'))
+        return redirect(url_for('.login'))
     return render_template('register.html', form=form)
 
 @user_bp.route("/hi/<string:name>")   #/hi/ivan?age=45
@@ -42,6 +47,51 @@ def greetings(name):
 
     return render_template("hi.html", 
                            name=name, age=age)
+@user_bp.route("/update_account", methods=['GET', 'POST'])
+@login_required
+def update_account():
+    form = UpdateForm(
+        email = current_user.email,
+        username = current_user.username
+    )
+    if form.validate_on_submit():
+        print(f"user")
+        user = current_user
+        user.username = form.username.data
+        user.email = form.email.data
+        user.about_me = form.about_me.data
+        
+        if form.img_file.data:
+            picture_file = save_picture(form.img_file.data)
+            user.img_file = picture_file
+        db.session.commit()
+        return redirect(url_for(".account"))
+    return render_template('update_account.html', form=form, user=current_user)
+
+
+def save_picture(form_picture):
+    _, ext = os.path.splitext(form_picture.filename)
+    hash_name = hashlib.md5(form_picture.read()).hexdigest()
+    form_picture.seek(0)
+    filename = f"{hash_name}{ext}"
+    picture_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+    os.makedirs(os.path.dirname(picture_path), exist_ok=True)
+    form_picture.save(picture_path)
+
+@user_bp.route('/change_password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+
+    if form.validate_on_submit():
+        if not current_user and not User.check_password(current_user,form.old_password.data):
+            flash('Incorrect old password', 'danger')
+            return redirect(url_for('change_password'))
+        current_user.password = User.hash_password(password=form.new_password.data)
+        db.session.commit()
+        flash('Your password has been updated!', 'success')
+        return redirect(url_for('.get_profile'))
+    return render_template('change_password.html', form=form)
 
 @user_bp.route("/admin")
 def admin():

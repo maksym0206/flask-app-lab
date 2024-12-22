@@ -4,5 +4,14 @@
 {% block content%}
     <h1>Ласкаво просимо, {{user.username}}</h1>
     <h1>{{user.email}}</h1>
+    <h1>{{user.about_me}}</h1>
+    <h1>{{user.last_seen}}</h1>
+    <img src="{{ url_for('static', filename='images/User_Img/' + user.image_file) }}" 
+                             alt="Profile Picture" 
+                             class="profile-image rounded-circle mb-3" 
+                             width="150" 
+                             height="150">
     <a class="btn w-1 btn-danger" href="{{url_for('users.logout')}}">logout</a>
+    <a class="btn btn-primary" href="{{ url_for('users.update_account') }}">Update Account</a>
+    <a class="btn btn-primary" href="{{ url_for('users.change_password') }}">Change password</a>
 {% endblock %}

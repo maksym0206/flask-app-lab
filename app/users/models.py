@@ -1,5 +1,6 @@
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime as dt
 from flask_login import UserMixin
 from app import login_manager
 
@@ -14,6 +15,9 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(120),unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
+    image_file = db.Column(db.String(20), nullable=True, default="default.jpg")
+    about_me = db.Column(db.Text, nullable=True, default="")
+    last_seen = db.Column(db.DateTime, default=dt.now())
 
     def hash_password(password):
         return generate_password_hash(password)

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %} POSTS - add posts {% endblock %}
+
+{% block content %}
+
+<form action="" method="post"  enctype="multipart/form-data" novalidate>{{ form.hidden_tag() }}
+    {% from 'form_macros.html' import render_field %}
+
+    {{ render_field(form.email) }}
+    {{ render_field(form.username) }}
+    {{ render_field(form.img_file) }}
+    {{ render_field(form.about_me) }}
+    <div class="form-group">
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+{% endblock %}

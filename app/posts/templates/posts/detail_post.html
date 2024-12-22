@@ -11,6 +11,16 @@
         <p><strong>Author:</strong> {{ post.author }}</p>
         <p><strong>Category:</strong> {{ post.category}}</p>
         <p><strong>Date:</strong> {{ post.posted }}</p>
+        <strong>Tags:</strong>
+        {% if post.tags %}
+            <ul>
+                {% for tag in post.tags %}
+                    <li class="tag-item">{{ tag.name }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No tags available for this post.</p>
+        {% endif %}
 
         <a href="{{ url_for('posts.edit_post', id=post.id) }}" class="btn btn-warning mt-3">Edit Post</a>
 

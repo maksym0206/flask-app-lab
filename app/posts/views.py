@@ -2,7 +2,8 @@ from . import post_bp
 from flask import render_template, abort, flash, redirect, url_for, session
 from .forms import PostForm
 from .functions import read_posts, write_posts, get_new_id
-from .model import Post
+from .models import Post, Tag
+from app.users.models import User
 from app import db
 
 
@@ -26,22 +27,21 @@ def detail_post(id):
 @post_bp.route('/add_post', methods=['GET', 'POST'])
 def add_post():
     form = PostForm()
+    form.author_id.choices = [(author.id, author.username) for author in User.query.all()]
+    form.tags.choices = [(tag.id, tag.name) for tag in Tag.query.all()]
     if form.validate_on_submit():
-        new_post = {
-            "id": get_new_id(),
-            "title": form.title.data,
-            "content": form.content.data,
-            "category": form.category.data,
-            "is_active": form.is_active.data,
-            "publication_date": form.publish_date.data.strftime('%Y-%m-%d'),
-            "author": session.get('username', 'Unknown')
-        }
-
-        posts = read_posts()
-        posts.append(new_post)
-        write_posts(posts)
-
-        flash('Post added successfully!', 'success')
+        new_post = Post(title=form.title.data, 
+                        content=form.content.data, 
+                        category=form.category.data,
+                        is_active = form.is_active.data,
+                        author=User.query.get(form.author_id.data),
+                        date = form.publish_date.data
+                        )
+        selected_tags = Tag.query.filter(Tag.id.in_(form.tags.data)).all()
+        new_post.tags.extend(selected_tags)
+        db.session.add(new_post)
+        db.session.commit()
+        flash('Post {new_post.title} added successfully!', 'success')
         return redirect(url_for('posts.get_posts'))
 
     return render_template('add_post.html', form=form)

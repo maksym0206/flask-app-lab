@@ -1,6 +1,7 @@
 from . import user_bp
 from flask import request, redirect, url_for, render_template, session, flash, make_response
 from datetime import timedelta, datetime
+from .models import User
 
 users = {
     "user1": "123",

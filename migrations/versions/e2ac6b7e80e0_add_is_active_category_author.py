@@ -21,7 +21,7 @@ def upgrade():
     with op.batch_alter_table('posts', schema=None) as batch_op:
         if not has_column('posts', 'is_active'):
             batch_op.add_column(sa.Column('is_active', sa.Boolean(), nullable=True))
-        batch_op.add_column(sa.Column('category', sa.String(length=100), nullable=True, server_default=None))
+        batch_op.add_column(sa.Column('category', sa.String(length=100), nullable=True, server_default='default_category'))
         batch_op.add_column(sa.Column('author', sa.String(length=100), nullable=True, server_default=""))
 
     # ### end Alembic commands ###

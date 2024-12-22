@@ -2,7 +2,7 @@ from msilib.schema import PublishComponent
 from wsgiref.validate import validator
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SubmitField
+from wtforms import StringField, TextAreaField, SubmitField, SelectMultipleField
 from wtforms.fields.choices import SelectField
 from wtforms.fields.datetime import DateField
 from wtforms.fields.simple import BooleanField
@@ -22,6 +22,8 @@ class PostForm(FlaskForm):
                              ,default=dt.now())
     category = SelectField("Category",
                            choices=CATEGORIES, validators=[DataRequired()])
+    author_id = SelectField("Author", coerce = int )
+    tags = SelectMultipleField("Tags", coerce=int)
     submit = SubmitField("Submit")
 
 

@@ -1,0 +1,8 @@
+{%extends 'base.html'%}
+
+{% block title%}profile{% endblock %}
+{% block content%}
+    <h1>Ласкаво просимо, {{user.username}}</h1>
+    <h1>{{user.email}}</h1>
+    <a class="btn w-1 btn-danger" href="{{url_for('users.logout')}}">logout</a>
+{% endblock %}
